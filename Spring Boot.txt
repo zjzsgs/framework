@@ -1,0 +1,49 @@
+Spring Boot
+启动方式
+	1，运行类
+	2，mvn spring-boot:run（注意：cd到module目录，Ctrl+C终止）
+	3,编译mvn install 得到 jar，cd到target目录下， 运行java -jar jarname.jar（table键候补提示）
+访问
+	http://localhost:8080/hello
+	修改properties
+	server.port=8081 server.context-path=/demo
+	访问http://localhost:8081/demo/hello
+	另一种配置文件application.yml
+	server:
+		port: 8081  #冒号后面有空格
+		context-path: /demo
+使用Spring Initializr创建SpringBoot项目
+	可以删除mvnw和mvnw.cmd以及.mvn文件夹
+配置项目属性
+	默认是application.properties
+	#配置端口号
+	server.port=8081
+	#配置项目名
+	server.context-path=/demo
+	推荐使用application.yml
+	#冒号后有空格
+	server: 
+	  port: 8082
+	  context-path: /demo
+自定义属性配置
+	设置cupSize: A
+	使用@Value("${cupSize}") private String cupSize;
+	配置中一用配置	content: "cupSize: ${cupSize},age: ${age}"
+	前缀配置类，@Component //Autowired注入 @ConfigurationProperties(prefix = "girl")//前缀配置类
+	多环境配置
+		spring:  profiles:    active: prod 
+		使用java -jar sb1-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev启动多个环境
+spring-boot-jpa  标准
+	Restful API设计
+	get	/girls	获取女生列表
+	post	/girls	创建一个女生
+	get	/girls/id	通过id查询
+	put	/girls/id	通过id更新
+	delete	/girls/id	通过id删除
+	添加jpa和mysql依赖
+	实体类到数据表的映射
+	接口继承JpaRepository<Entity,Integer>
+事务管理
+	地址栏只能发送get请求
+	import javax.transaction.Transactional;
+	//import org.springframework.transaction.annotation.Transactional;

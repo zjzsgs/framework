@@ -1,0 +1,5 @@
+2017-09-29
+next()和nextLine()
+	都是接收输入的字符串。next()碰到空格，tab，回车就终止。nextLine()碰到回车输入终止。
+java中goto是保留字
+	可用label：然后break label;和continue label;

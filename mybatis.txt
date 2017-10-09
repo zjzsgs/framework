@@ -1,0 +1,30 @@
+SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession的范围：
+	方法范围、应用范围、请求或方法范围(不能被共享，线程不安全)
+
+#{}和${}区别：
+	#{} 在预处理时，会把参数部分用一个占位符 ? 代替，而 ${} 则只是简单的字符串替换。
+	#{} 的参数替换是发生在 DBMS 中，而 ${} 则发生在动态解析过程中。
+	#将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。$将传入的数据直接显示生成在sql中。
+	#方式能够很大程度防止sql注入。$方式一般用于传入数据库对象，例如传入表名。
+	一般能用#的就别用$。MyBatis排序时使用order by 动态参数时需要注意，用$而不是#。
+Executor：
+	Mybatis对外统一提供了一个操作接口类Executor，提供的接口方法有update、query、flushStatements、commit、rollback等接口函数。
+	具体实现类有抽象类BaseExecutor、实现类CachingExecutor、实现类BatchExecutor、实现类ReuseExecutor和实现类SimpleExecutor。
+Mybatis二级缓存：
+	1）只能在【只有单表操作】的表上使用缓存
+	不只是要保证这个表在整个系统中只有单表操作，而且和该表有关的全部操作必须全部在一个namespace下。
+	2）在可以保证查询远远大于insert,update,delete操作的情况下使用缓存
+	1，缓存是以namespace为单位的，不同namespace下的操作互不影响。
+	2，insert,update,delete操作会清空所在namespace下的全部缓存。
+	3，通常使用MyBatis Generator生成的代码中，都是各个表独立的，每个表都有自己的namespace。
+	避免使用二级缓存：
+	针对一个表的某些操作不在他独立的namespace下进行。
+	多表操作一定不能使用缓存。
+	建议：
+	放弃二级缓存，在业务层使用可控制的缓存代替更好。(Redis)
+管理事务：
+	mybatis单独使用时，使用sqlsession处理事务。
+	与spring集成，使用spring的事务管理。
+		@Transactional方式：
+		TransactionTemplate方式 ：
+

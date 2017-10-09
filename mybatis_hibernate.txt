@@ -1,0 +1,13 @@
+相同点：
+	都是通过SessionFactoryBuilder由XML配置文件生成SessionFactory，然后由SessionFactory生成Session，最后由Session开启执行事务和SQL语句。它们的生命周期都差不多。都支持JDBC和JTA事务处理。
+MyBatis优势：
+	更为细致的sql优化，减少查询字段。
+	MyBatis更容易掌握，hibernate门槛高。
+Hibernate优势：
+	dao层开发更简单，MyBatis需要维护sql和ResultMap。
+	对对象的维护和缓存更好，对增删改查的对象的维护更方便。
+	数据库移植性好，MyBatis不同的数据库要写不同的sql。
+	更好的二级缓存，可以使用第三方缓存，MyBatis自身提供的缓存机制不佳。
+总结：
+	Mybatis：小巧、方便、高效、简单、直接、半自动化
+	Hibernate：强大、方便、高效、复杂、间接、全自动化
